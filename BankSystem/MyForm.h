@@ -48,11 +48,16 @@ namespace BankSystem {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->components = gcnew System::ComponentModel::Container();
-			this->Size = System::Drawing::Size(300,300);
+			this->SuspendLayout();
+			// 
+			// MyForm
+			// 
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
+			this->ClientSize = System::Drawing::Size(282, 253);
+			this->Name = L"MyForm";
 			this->Text = L"MyForm";
-			this->Padding = System::Windows::Forms::Padding(0);
-			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ResumeLayout(false);
+
 		}
 #pragma endregion
 	};
