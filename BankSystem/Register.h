@@ -1,6 +1,8 @@
 #pragma once
-
-
+#include "Konto.h"
+#include <iostream>
+#include <fstream>
+#include <msclr/marshal_cppstd.h>
 
 
 namespace BankSystem {
@@ -65,6 +67,9 @@ namespace BankSystem {
 
 	private: System::Windows::Forms::Label^ label8;
 	private: System::Windows::Forms::Button^ buttonZarejestruj;
+	private: System::Windows::Forms::Label^ label9;
+	private: System::Windows::Forms::TextBox^ textBoxHaslo;
+
 
 	protected:
 
@@ -102,6 +107,8 @@ namespace BankSystem {
 			this->textBoxNrTelefonu = (gcnew System::Windows::Forms::TextBox());
 			this->label8 = (gcnew System::Windows::Forms::Label());
 			this->buttonZarejestruj = (gcnew System::Windows::Forms::Button());
+			this->label9 = (gcnew System::Windows::Forms::Label());
+			this->textBoxHaslo = (gcnew System::Windows::Forms::TextBox());
 			this->SuspendLayout();
 			// 
 			// buttonWroc
@@ -259,11 +266,30 @@ namespace BankSystem {
 			this->buttonZarejestruj->TabIndex = 18;
 			this->buttonZarejestruj->Text = L"Zarejestruj";
 			this->buttonZarejestruj->UseVisualStyleBackColor = true;
+			this->buttonZarejestruj->Click += gcnew System::EventHandler(this, &Register::buttonZarejestruj_Click);
+			// 
+			// label9
+			// 
+			this->label9->AutoSize = true;
+			this->label9->Location = System::Drawing::Point(313, 325);
+			this->label9->Name = L"label9";
+			this->label9->Size = System::Drawing::Size(86, 16);
+			this->label9->TabIndex = 20;
+			this->label9->Text = L"Ustaw has³o:";
+			// 
+			// textBoxHaslo
+			// 
+			this->textBoxHaslo->Location = System::Drawing::Point(313, 347);
+			this->textBoxHaslo->Name = L"textBoxHaslo";
+			this->textBoxHaslo->Size = System::Drawing::Size(200, 22);
+			this->textBoxHaslo->TabIndex = 19;
 			// 
 			// Register
 			// 
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
 			this->ClientSize = System::Drawing::Size(700, 500);
+			this->Controls->Add(this->label9);
+			this->Controls->Add(this->textBoxHaslo);
 			this->Controls->Add(this->buttonZarejestruj);
 			this->Controls->Add(this->label8);
 			this->Controls->Add(this->textBoxNrTelefonu);
@@ -295,5 +321,45 @@ namespace BankSystem {
 	private: System::Void buttonWroc_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Close();
 	}
-	};
+	private: System::Void buttonZarejestruj_Click(System::Object^ sender, System::EventArgs^ e) {
+		std::string imie = msclr::interop::marshal_as<std::string>(textBoxImie->Text);
+		std::string drugieImie = msclr::interop::marshal_as<std::string>(textBoxDrugieImie->Text);
+		std::string nazwisko = msclr::interop::marshal_as<std::string>(textBoxNazwisko->Text);
+		std::string numerKierunkowy = msclr::interop::marshal_as<std::string>(textBoxNrKierunkowy->Text);
+		std::string numerTelefonu = msclr::interop::marshal_as<std::string>(textBoxNrTelefonu->Text);
+		std::string email = msclr::interop::marshal_as<std::string>(textBoxEmail->Text);
+		std::string pesel = msclr::interop::marshal_as<std::string>(textBoxPesel->Text);
+		std::string seriaDowodu = msclr::interop::marshal_as<std::string>(textBoxSeriaDowodu->Text);
+		std::string numerDowodu = msclr::interop::marshal_as<std::string>(textBoxNrDowodu->Text);
+		std::string haslo = msclr::interop::marshal_as<std::string>(textBoxHaslo->Text);
+
+
+		Konto* noweKonto = new Konto(imie, drugieImie, nazwisko, numerKierunkowy, numerTelefonu, email, pesel, seriaDowodu, numerDowodu, haslo);
+
+		// Zapisanie danych do pliku
+		std::ofstream plik("C:\\Users\\macie\\Desktop\\Cpp - Maciej_Pereœlucha_Projekt\\BankSystem\\dane_klientow.txt", std::ios::app);
+		if (plik.is_open()) {
+			plik << noweKonto->getNumerKonta() << ",";
+			plik << noweKonto->getHaslo() << ",";
+			plik << noweKonto->getSaldo() << ",";
+			plik <<  noweKonto->getImie() << ",";
+			plik <<  noweKonto->getDrugieImie() << ",";
+			plik <<  noweKonto->getNazwisko() << ",";
+			plik <<  noweKonto->getNumerKierunkowy() << ",";
+			plik <<  noweKonto->getNumerTelefonu() << ",";
+			plik <<  noweKonto->getEmail() << ",";
+			plik <<  noweKonto->getPesel() << ",";
+			plik <<  noweKonto->getSeriaDowodu() << ",";
+			plik <<  noweKonto->getNumerDowodu() << "\n";
+			
+			plik.close();
+		}
+
+		MessageBox::Show("Rejestracja zakoñczona sukcesem!\nNumer konta: " + gcnew String(noweKonto->getNumerKonta().c_str()), "Sukces");
+		this->Close();
+
+	}
+
+
+};
 }

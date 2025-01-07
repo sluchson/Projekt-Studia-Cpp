@@ -123,6 +123,7 @@ namespace BankSystem {
 			this->buttonZaloguj->TabIndex = 5;
 			this->buttonZaloguj->Text = L"Zaloguj";
 			this->buttonZaloguj->UseVisualStyleBackColor = true;
+			this->buttonZaloguj->Click += gcnew System::EventHandler(this, &MyForm::buttonZaloguj_Click);
 			// 
 			// buttonRejestroj
 			// 
@@ -157,5 +158,8 @@ namespace BankSystem {
 		Register^ registerForm = gcnew Register();
 		registerForm->Show();
 	}
+private: System::Void buttonZaloguj_Click(System::Object^ sender, System::EventArgs^ e) {
+
+}
 };
 }
