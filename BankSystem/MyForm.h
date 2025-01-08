@@ -1,12 +1,14 @@
 #pragma once
 #include "Register.h"
 #include "Konto.h"
+#include "Home.h"
 
 #include <vector>
 #include <fstream>
 #include <sstream>
 #include <string>
 #include <iostream>	
+
 
 
 namespace BankSystem {
@@ -31,6 +33,9 @@ namespace BankSystem {
 			//TODO: W tym miejscu dodaj kod konstruktora
 			//
 		}
+		System::String^ aktualnyUzytkownik;
+		Konto* zalogowanyKlient;  // U¿ywamy wskaŸnika zarz¹dzanego do obiektu Konto
+		
 	protected:
 		/// <summary>
 		/// Wyczyœæ wszystkie u¿ywane zasoby.
@@ -163,57 +168,67 @@ namespace BankSystem {
 		Register^ registerForm = gcnew Register();
 		registerForm->Show();
 	}
-private: System::Void buttonZaloguj_Click(System::Object^ sender, System::EventArgs^ e) {
-	// Œcie¿ka do pliku z danymi klientów
-	const std::string sciezkaPliku = "C:\\Users\\macie\\Desktop\\Cpp - Maciej_Pereœlucha_Projekt\\BankSystem\\dane_klientow.txt";
+	private: System::Void buttonZaloguj_Click(System::Object^ sender, System::EventArgs^ e) {
+		// Œcie¿ka do pliku z danymi klientów
+		const std::string sciezkaPliku = "C:\\Users\\macie\\Desktop\\Cpp - Maciej_Pereœlucha_Projekt\\BankSystem\\dane_klientow.txt";
 
-	// Otwieranie pliku
-	std::ifstream plik(sciezkaPliku);
-	if (!plik.is_open()) {
-		MessageBox::Show("Nie mo¿na otworzyæ pliku z danymi klientów!");
-		return;
-	}
+		// Otwieranie pliku
+		std::ifstream plik(sciezkaPliku);
+		if (!plik.is_open()) {
+			MessageBox::Show("Nie mo¿na otworzyæ pliku z danymi klientów!");
+			return;
+		}
 
-	std::vector<Konto> klienci;  // Lista obiektów klientów
-	std::string linia;
+		std::vector<Konto> klienci;  // Lista obiektów klientów
+		std::string linia;
 
-	// Odczyt danych z pliku linia po linii
-	while (std::getline(plik, linia)) {
-		std::stringstream ss(linia);
-		std::string numerKonta, haslo, saldo, imie, drugieImie, nazwisko, numerKierunkowy, numerTelefonu, email, pesel, seriaDowodu, numerDowodu;
+		// Odczyt danych z pliku linia po linii
+		while (std::getline(plik, linia)) {
+			std::stringstream ss(linia);
+			std::string numerKonta, haslo, saldo, imie, drugieImie, nazwisko, numerKierunkowy, numerTelefonu, email, pesel, seriaDowodu, numerDowodu;
 
-		// Parsowanie danych
-		if (std::getline(ss, numerKonta, ',') &&
-			std::getline(ss, haslo, ',') &&
-			std::getline(ss, saldo, ',') &&
-			std::getline(ss, imie, ',') &&
-			std::getline(ss, drugieImie, ',') &&
-			std::getline(ss, nazwisko, ',') &&
-			std::getline(ss, numerKierunkowy, ',') &&
-			std::getline(ss, numerTelefonu, ',') &&
-			std::getline(ss, email, ',') &&
-			std::getline(ss, pesel, ',') &&
-			std::getline(ss, seriaDowodu, ',') &&
-			std::getline(ss, numerDowodu)) {
+			// Parsowanie danych
+			if (std::getline(ss, numerKonta, ',') &&
+				std::getline(ss, haslo, ',') &&
+				std::getline(ss, saldo, ',') &&
+				std::getline(ss, imie, ',') &&
+				std::getline(ss, drugieImie, ',') &&
+				std::getline(ss, nazwisko, ',') &&
+				std::getline(ss, numerKierunkowy, ',') &&
+				std::getline(ss, numerTelefonu, ',') &&
+				std::getline(ss, email, ',') &&
+				std::getline(ss, pesel, ',') &&
+				std::getline(ss, seriaDowodu, ',') &&
+				std::getline(ss, numerDowodu)) {
 
-			// Tworzenie obiektu Konto
-			Konto klient(imie, drugieImie, nazwisko, numerKierunkowy, numerTelefonu, email, pesel, seriaDowodu, numerDowodu, numerKonta, haslo, std::stod(saldo));
+				// Tworzenie obiektu Konto
+				Konto klient(imie, drugieImie, nazwisko, numerKierunkowy, numerTelefonu, email, pesel, seriaDowodu, numerDowodu, numerKonta, haslo, std::stod(saldo));
 
-			// Sprawdzenie, czy numer konta i has³o pasuj¹
-			std::string nrKonta = msclr::interop::marshal_as<std::string>(textBoxNrKonta->Text);
-			std::string hasloText = msclr::interop::marshal_as<std::string>(textBoxHaslo->Text);
+				// Sprawdzenie, czy numer konta i has³o pasuj¹
+				std::string nrKonta = msclr::interop::marshal_as<std::string>(textBoxNrKonta->Text);
+				std::string hasloText = msclr::interop::marshal_as<std::string>(textBoxHaslo->Text);
 
-			if (klient.getNumerKonta() == nrKonta && klient.getHaslo() == hasloText) {
-				MessageBox::Show("Zalogowano pomyœlnie!");
-				plik.close();
-				return; // Zakoñcz procedurê logowania
+				if (klient.getNumerKonta() == nrKonta && klient.getHaslo() == hasloText) {
+					MessageBox::Show("Zalogowano pomyœlnie!");
+
+					// Zapisz dane zalogowanego u¿ytkownika
+					aktualnyUzytkownik = msclr::interop::marshal_as<System::String^>(nrKonta);
+					zalogowanyKlient = &klient;  // Przechowaj obiekt klienta
+
+					plik.close();
+
+					// Przeka¿ dane do formularza Home
+					Home^ homeForm = gcnew Home(zalogowanyKlient);  // Konstruktor przyjmuj¹cy klienta
+					homeForm->Show();
+					return; // Zakoñcz procedurê logowania
+				}
 			}
 		}
+
+		plik.close();
+		MessageBox::Show("Nie znaleziono klienta z podanym numerem konta i has³em.");
 	}
 
-	plik.close();
-	MessageBox::Show("Nie znaleziono klienta z podanym numerem konta i has³em.");
-}
 
 
 };
