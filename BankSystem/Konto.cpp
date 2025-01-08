@@ -1,9 +1,18 @@
+#pragma once
+
 #include "Konto.h"
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
 #include <string>
 #include <random>
+#include <sstream>
+#include <vector>
+
+
+
+// Globalny kontener na obiekty Konto
+std::vector<Konto*> listaKlientow;
 
 Konto::Konto(
     const std::string& imie,
@@ -15,6 +24,7 @@ Konto::Konto(
     const std::string& pesel,
     const std::string& seriaDowodu,
     const std::string& numerDowodu,
+    const std::string& numerKonta,
     const std::string& haslo,
     double saldo)
     : imie(imie),
@@ -26,9 +36,10 @@ Konto::Konto(
     pesel(pesel),
     seriaDowodu(seriaDowodu),
     numerDowodu(numerDowodu),
+    numerKonta(numerKonta),
     haslo(haslo),
     saldo(saldo) {
-    ustalNumerKonta();
+
 }
 
 
@@ -55,31 +66,25 @@ bool Konto::wyplac(double kwota) {
     return true;
 }
 
-void Konto::wyswietlInformacje() const {
-    std::cout << "Imie: " << imie << "\n"
-        << "Drugie imie: " << drugieImie << "\n"
-        << "Nazwisko: " << nazwisko << "\n"
-        << "Numer kierunkowy: " << numerKierunkowy << "\n"
-        << "Numer telefonu: " << numerTelefonu << "\n"
-        << "Email: " << email << "\n"
-        << "PESEL: " << pesel << "\n"
-        << "Seria dowodu: " << seriaDowodu << "\n"
-        << "Numer dowodu: " << numerDowodu << "\n"
-        << "Numer konta: " << numerKonta << "\n"
-        << "Saldo: " << saldo << "\n";
-}
 
-void Konto::ustalNumerKonta() {
+std::string Konto::ustalNumerKonta() {
     // U¿ycie generatora liczb losowych
     std::random_device rd;  // Ziarno generatora
     std::mt19937 gen(rd()); // Generator Mersenne Twister
     std::uniform_int_distribution<> dis(0, 9); // Rozk³ad równomierny dla cyfr (0-9)
 
-    numerKonta.clear(); // Czyœcimy numer konta przed generowaniem nowego
+    std::string nowyNumerKonta;
 
     // Generujemy 26-cyfrowy numer konta
     for (int i = 0; i < 26; ++i) {
-        numerKonta += std::to_string(dis(gen));  // Dodajemy losow¹ cyfrê do numeru konta
+        nowyNumerKonta += std::to_string(dis(gen));  // Dodajemy losow¹ cyfrê do numeru konta
     }
+
+    return nowyNumerKonta; // Zwracamy wygenerowany numer konta
 }
+
+
+
+
+
 

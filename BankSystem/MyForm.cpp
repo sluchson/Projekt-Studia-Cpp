@@ -1,5 +1,6 @@
 #include "MyForm.h"
 #include "Register.h"
+#include "Konto.h"
 
 using namespace System;
 using namespace System::Windows::Forms;

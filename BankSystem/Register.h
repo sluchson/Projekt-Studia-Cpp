@@ -332,9 +332,9 @@ namespace BankSystem {
 		std::string seriaDowodu = msclr::interop::marshal_as<std::string>(textBoxSeriaDowodu->Text);
 		std::string numerDowodu = msclr::interop::marshal_as<std::string>(textBoxNrDowodu->Text);
 		std::string haslo = msclr::interop::marshal_as<std::string>(textBoxHaslo->Text);
+		std::string numerKonta = Konto::ustalNumerKonta();
 
-
-		Konto* noweKonto = new Konto(imie, drugieImie, nazwisko, numerKierunkowy, numerTelefonu, email, pesel, seriaDowodu, numerDowodu, haslo);
+		Konto* noweKonto = new Konto(imie, drugieImie, nazwisko, numerKierunkowy, numerTelefonu, email, pesel, seriaDowodu, numerDowodu, numerKonta, haslo);
 
 		// Zapisanie danych do pliku
 		std::ofstream plik("C:\\Users\\macie\\Desktop\\Cpp - Maciej_Pereœlucha_Projekt\\BankSystem\\dane_klientow.txt", std::ios::app);

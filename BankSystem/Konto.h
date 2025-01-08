@@ -1,5 +1,5 @@
 
-
+#pragma once
 #include <string>
 
 class Konto {
@@ -13,9 +13,11 @@ private:
     std::string pesel;
     std::string seriaDowodu;
     std::string numerDowodu;
-    std::string haslo;
     std::string numerKonta;
+    std::string haslo;
     double saldo;
+
+
 
 public:
     // Konstruktor
@@ -29,6 +31,7 @@ public:
         const std::string& pesel,
         const std::string& seriaDowodu,
         const std::string& numerDowodu,
+        const std::string& numerKonta,
         const std::string& haslo,
         double saldo = 0.0);
 
@@ -49,8 +52,7 @@ public:
     // Metody
     void wplac(double kwota);
     bool wyplac(double kwota);
-    void wyswietlInformacje() const;
-    void ustalNumerKonta();  
+    static std::string ustalNumerKonta();
 
 };
 
