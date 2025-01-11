@@ -79,7 +79,7 @@ namespace BankSystem {
 		/// <summary>
 		/// Wymagana zmienna projektanta.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -337,9 +337,10 @@ namespace BankSystem {
 		Konto* noweKonto = new Konto(imie, drugieImie, nazwisko, numerKierunkowy, numerTelefonu, email, pesel, seriaDowodu, numerDowodu, numerKonta, haslo);
 
 		// Zapisanie danych do pliku
-		std::ofstream plik("C:\\Users\\macie\\Desktop\\Cpp - Maciej_Pereœlucha_Projekt\\BankSystem\\dane_klientow.txt", std::ios::app);
+		std::ofstream plik("dane_klientow.txt", std::ios::app);
 		if (plik.is_open()) {
-			plik << noweKonto->getNumerKonta() << ",";
+			plik << *noweKonto;
+			/*plik << noweKonto->getNumerKonta() << ",";
 			plik << noweKonto->getHaslo() << ",";
 			plik << noweKonto->getSaldo() << ",";
 			plik <<  noweKonto->getImie() << ",";
@@ -350,8 +351,8 @@ namespace BankSystem {
 			plik <<  noweKonto->getEmail() << ",";
 			plik <<  noweKonto->getPesel() << ",";
 			plik <<  noweKonto->getSeriaDowodu() << ",";
-			plik <<  noweKonto->getNumerDowodu() << "\n";
-			
+			plik <<  noweKonto->getNumerDowodu() << "\n";*/
+
 			plik.close();
 		}
 
@@ -361,5 +362,5 @@ namespace BankSystem {
 	}
 
 
-};
+	};
 }

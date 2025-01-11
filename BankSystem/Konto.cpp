@@ -83,6 +83,14 @@ std::string Konto::ustalNumerKonta() {
     return nowyNumerKonta; // Zwracamy wygenerowany numer konta
 }
 
+std::ostream& operator<<(std::ostream& wy, const Konto& p)
+{
+    wy << p.getNumerKonta() << "," << p.getHaslo() << "," << p.getSaldo() << "," << p.getImie() << "," << p.getDrugieImie() << "," << p.getNazwisko() << "," << p.getNumerKierunkowy() << "," << p.getNumerTelefonu() << "," << p.getEmail() << ","
+        << p.getPesel() << "," << p.getSeriaDowodu() << "," << p.getNumerDowodu() << "\n";
+    return wy;
+}
+
+
 
 
 

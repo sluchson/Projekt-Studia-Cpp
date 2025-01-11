@@ -54,6 +54,7 @@ public:
     bool wyplac(double kwota);
     static std::string ustalNumerKonta();
 
+    friend std::ostream& operator<<(std::ostream& wy, const Konto& p);
+    friend std::ostream& operator>>(std::ostream& wy, const Konto& p);
 };
-
-
+std::ostream& operator<<(std::ostream& wy, const Konto& p);
