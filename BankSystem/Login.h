@@ -1,5 +1,4 @@
 #pragma once
-#include "Register.h"
 #include "Konto.h"
 #include "Home.h"
 
@@ -8,7 +7,7 @@
 #include <sstream>
 #include <string>
 #include <iostream>	
-
+#include <msclr/marshal_cppstd.h>
 
 
 namespace BankSystem {
@@ -55,7 +54,7 @@ namespace BankSystem {
 	private: System::Windows::Forms::TextBox^ textBoxNrKonta;
 	private: System::Windows::Forms::TextBox^ textBoxHaslo;
 	private: System::Windows::Forms::Button^ buttonZaloguj;
-	private: System::Windows::Forms::Button^ buttonRejestroj;
+
 
 
 
@@ -81,7 +80,6 @@ namespace BankSystem {
 			this->textBoxNrKonta = (gcnew System::Windows::Forms::TextBox());
 			this->textBoxHaslo = (gcnew System::Windows::Forms::TextBox());
 			this->buttonZaloguj = (gcnew System::Windows::Forms::Button());
-			this->buttonRejestroj = (gcnew System::Windows::Forms::Button());
 			this->buttonWroc = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
@@ -138,16 +136,6 @@ namespace BankSystem {
 			this->buttonZaloguj->UseVisualStyleBackColor = true;
 			this->buttonZaloguj->Click += gcnew System::EventHandler(this, &Login::buttonZaloguj_Click);
 			// 
-			// buttonRejestroj
-			// 
-			this->buttonRejestroj->Location = System::Drawing::Point(122, 225);
-			this->buttonRejestroj->Name = L"buttonRejestroj";
-			this->buttonRejestroj->Size = System::Drawing::Size(90, 50);
-			this->buttonRejestroj->TabIndex = 6;
-			this->buttonRejestroj->Text = L"Zarejestruj";
-			this->buttonRejestroj->UseVisualStyleBackColor = true;
-			this->buttonRejestroj->Click += gcnew System::EventHandler(this, &Login::buttonRegister_Click);
-			// 
 			// buttonWroc
 			// 
 			this->buttonWroc->Location = System::Drawing::Point(12, 438);
@@ -163,7 +151,6 @@ namespace BankSystem {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
 			this->ClientSize = System::Drawing::Size(700, 500);
 			this->Controls->Add(this->buttonWroc);
-			this->Controls->Add(this->buttonRejestroj);
 			this->Controls->Add(this->buttonZaloguj);
 			this->Controls->Add(this->textBoxHaslo);
 			this->Controls->Add(this->textBoxNrKonta);
@@ -172,16 +159,13 @@ namespace BankSystem {
 			this->Controls->Add(this->label1);
 			this->Name = L"Login";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"MyForm";
+			this->Text = L"Login";
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
-	private: System::Void buttonRegister_Click(System::Object^ sender, System::EventArgs^ e) {
-		Register^ registerForm = gcnew Register();
-		registerForm->Show();
-	}
+
 	private: System::Void buttonZaloguj_Click(System::Object^ sender, System::EventArgs^ e) {
 		// Œcie¿ka do pliku z danymi klientów
 		const std::string sciezkaPliku = "dane_klientow.txt";

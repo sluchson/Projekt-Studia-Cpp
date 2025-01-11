@@ -3,6 +3,7 @@
 #include "Konto.h"
 #include "Home.h"
 #include "Login.h"
+#include "Worker.h"
 
 #include <vector>
 #include <fstream>
@@ -112,6 +113,7 @@ namespace BankSystem {
 			this->buttonKonta->TabIndex = 5;
 			this->buttonKonta->Text = L"Konta";
 			this->buttonKonta->UseVisualStyleBackColor = true;
+			this->buttonKonta->Click += gcnew System::EventHandler(this, &MyForm::buttonKonta_Click);
 			// 
 			// buttonUzytkownik
 			// 
@@ -148,6 +150,10 @@ private: System::Void buttonUzytkownik_Click(System::Object^ sender, System::Eve
 	Login^ loginForm = gcnew Login();
 	loginForm->Show();
 	
+}
+private: System::Void buttonKonta_Click(System::Object^ sender, System::EventArgs^ e) {
+	Worker^ workerForm = gcnew Worker();
+	workerForm->Show();
 }
 };
 }
