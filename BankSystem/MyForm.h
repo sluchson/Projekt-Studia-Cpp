@@ -4,6 +4,8 @@
 #include "Home.h"
 #include "Login.h"
 #include "Worker.h"
+#include "Lista.h"
+#include "ListaKont.h"
 
 #include <vector>
 #include <fstream>
@@ -34,19 +36,17 @@ namespace BankSystem {
 			//
 			//TODO: W tym miejscu dodaj kod konstruktora
 			//
+
 		}
 		System::String^ aktualnyUzytkownik;
 	private: System::Windows::Forms::Button^ buttonKonta;
 	private: System::Windows::Forms::Button^ buttonUzytkownik;
+	private: System::Windows::Forms::Button^ buttonZamknij;
 
 
 	public:
 
 	public:
-
-
-
-
 
 		   Konto* zalogowanyKlient;  // U¿ywamy wskaŸnika zarz¹dzanego do obiektu Konto
 		
@@ -62,16 +62,6 @@ namespace BankSystem {
 			}
 		}
 	private: System::Windows::Forms::Label^ label1;
-
-
-
-
-
-
-
-
-
-
 	protected:
 
 	private:
@@ -90,6 +80,7 @@ namespace BankSystem {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->buttonKonta = (gcnew System::Windows::Forms::Button());
 			this->buttonUzytkownik = (gcnew System::Windows::Forms::Button());
+			this->buttonZamknij = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -99,7 +90,7 @@ namespace BankSystem {
 				static_cast<System::Byte>(238)));
 			this->label1->Location = System::Drawing::Point(142, 67);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(488, 69);
+			this->label1->Size = System::Drawing::Size(586, 82);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"System Bankowy";
 			// 
@@ -127,10 +118,21 @@ namespace BankSystem {
 			this->buttonUzytkownik->UseVisualStyleBackColor = true;
 			this->buttonUzytkownik->Click += gcnew System::EventHandler(this, &MyForm::buttonUzytkownik_Click);
 			// 
+			// buttonZamknij
+			// 
+			this->buttonZamknij->Location = System::Drawing::Point(12, 438);
+			this->buttonZamknij->Name = L"buttonZamknij";
+			this->buttonZamknij->Size = System::Drawing::Size(90, 50);
+			this->buttonZamknij->TabIndex = 7;
+			this->buttonZamknij->Text = L"Zamknij";
+			this->buttonZamknij->UseVisualStyleBackColor = true;
+			this->buttonZamknij->Click += gcnew System::EventHandler(this, &MyForm::buttonZamknij_Click);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
 			this->ClientSize = System::Drawing::Size(700, 500);
+			this->Controls->Add(this->buttonZamknij);
 			this->Controls->Add(this->buttonUzytkownik);
 			this->Controls->Add(this->buttonKonta);
 			this->Controls->Add(this->label1);
@@ -152,8 +154,11 @@ private: System::Void buttonUzytkownik_Click(System::Object^ sender, System::Eve
 	
 }
 private: System::Void buttonKonta_Click(System::Object^ sender, System::EventArgs^ e) {
-	Worker^ workerForm = gcnew Worker();
+	Worker^ workerForm = gcnew Worker(globalnaListaKont);
 	workerForm->Show();
+}
+private: System::Void buttonZamknij_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->Close();
 }
 };
 }

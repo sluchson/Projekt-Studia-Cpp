@@ -20,6 +20,13 @@ private:
 
 
 public:
+
+    Konto() : saldo(0.0) {} // Domyœlny konstruktor inicjuje saldo na 0
+
+
+    Konto* m_pNastepny;
+    Konto* m_pPoprzedni;
+
     // Konstruktor
     Konto(
         const std::string& imie,
@@ -48,13 +55,30 @@ public:
     std::string getNumerKonta() const;
     std::string getHaslo() const;
     double getSaldo() const;
+    Konto* getNastepny() const { return m_pNastepny; }
+    Konto* getPoprzedni() const { return m_pPoprzedni; }
+
+    // Settery
+    void setImie(const std::string& noweImie);
+    void setDrugieImie(const std::string& noweDrugieImie);
+    void setNazwisko(const std::string& noweNazwisko);
+    void setNumerKierunkowy(const std::string& nowyNumerKierunkowy);
+    void setNumerTelefonu(const std::string& nowyNumerTelefonu);
+    void setEmail(const std::string& nowyEmail);
+    void setPesel(const std::string& nowyPesel);
+    void setSeriaDowodu(const std::string& nowaSeriaDowodu);
+    void setNumerDowodu(const std::string& nowyNumerDowodu);
+    void setNumerKonta(const std::string& nowyNumerKonta);
+    void setHaslo(const std::string& noweHaslo);
+    void setSaldo(double noweSaldo);
+
+
 
     // Metody
-    void wplac(double kwota);
-    bool wyplac(double kwota);
     static std::string ustalNumerKonta();
 
     friend std::ostream& operator<<(std::ostream& wy, const Konto& p);
-    friend std::ostream& operator>>(std::ostream& wy, const Konto& p);
+    friend std::istream& operator>>(std::istream& we, Konto& p);
 };
 std::ostream& operator<<(std::ostream& wy, const Konto& p);
+std::istream& operator>>(std::istream& we, Konto& p);
