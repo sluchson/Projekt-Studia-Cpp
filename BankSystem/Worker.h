@@ -5,6 +5,7 @@
 #include "Login.h"
 #include "Lista.h"
 #include "ListaKont.h"
+#include "Usun.h"
 
 #include <vector>
 #include <fstream>
@@ -54,18 +55,22 @@ namespace BankSystem {
             this->buttonDelete = (gcnew System::Windows::Forms::Button());
             this->buttonWroc = (gcnew System::Windows::Forms::Button());
             this->SuspendLayout();
-
-            // Label
+            // 
+            // label1
+            // 
             this->label1->AutoSize = true;
-            this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 22.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(238)));
+            this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 22.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+                static_cast<System::Byte>(238)));
             this->label1->Location = System::Drawing::Point(74, 85);
             this->label1->Name = L"label1";
-            this->label1->Size = System::Drawing::Size(682, 52);
+            this->label1->Size = System::Drawing::Size(563, 42);
             this->label1->TabIndex = 0;
             this->label1->Text = L"Witaj pracowniku! Wybierz akcjê:";
-
-            // Button List
-            this->buttonList->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(238)));
+            // 
+            // buttonList
+            // 
+            this->buttonList->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+                static_cast<System::Byte>(238)));
             this->buttonList->Location = System::Drawing::Point(19, 181);
             this->buttonList->Name = L"buttonList";
             this->buttonList->Size = System::Drawing::Size(200, 100);
@@ -73,9 +78,11 @@ namespace BankSystem {
             this->buttonList->Text = L"Lista kont";
             this->buttonList->UseVisualStyleBackColor = true;
             this->buttonList->Click += gcnew System::EventHandler(this, &Worker::buttonList_Click);
-
-            // Button Register
-            this->buttonRegister->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(238)));
+            // 
+            // buttonRegister
+            // 
+            this->buttonRegister->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+                static_cast<System::Byte>(238)));
             this->buttonRegister->Location = System::Drawing::Point(252, 181);
             this->buttonRegister->Name = L"buttonRegister";
             this->buttonRegister->Size = System::Drawing::Size(200, 100);
@@ -83,17 +90,21 @@ namespace BankSystem {
             this->buttonRegister->Text = L"Za³ó¿ konto";
             this->buttonRegister->UseVisualStyleBackColor = true;
             this->buttonRegister->Click += gcnew System::EventHandler(this, &Worker::buttonRegister_Click);
-
-            // Button Delete
-            this->buttonDelete->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(238)));
+            // 
+            // buttonDelete
+            // 
+            this->buttonDelete->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+                static_cast<System::Byte>(238)));
             this->buttonDelete->Location = System::Drawing::Point(488, 181);
             this->buttonDelete->Name = L"buttonDelete";
             this->buttonDelete->Size = System::Drawing::Size(200, 100);
             this->buttonDelete->TabIndex = 7;
             this->buttonDelete->Text = L"Usuñ konto";
             this->buttonDelete->UseVisualStyleBackColor = true;
-
-            // Button Wroc
+            this->buttonDelete->Click += gcnew System::EventHandler(this, &Worker::buttonDelete_Click);
+            // 
+            // buttonWroc
+            // 
             this->buttonWroc->Location = System::Drawing::Point(12, 438);
             this->buttonWroc->Name = L"buttonWroc";
             this->buttonWroc->Size = System::Drawing::Size(90, 50);
@@ -101,8 +112,9 @@ namespace BankSystem {
             this->buttonWroc->Text = L"Wróæ";
             this->buttonWroc->UseVisualStyleBackColor = true;
             this->buttonWroc->Click += gcnew System::EventHandler(this, &Worker::buttonWroc_Click);
-
-            // Worker Form
+            // 
+            // Worker
+            // 
             this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
             this->ClientSize = System::Drawing::Size(700, 500);
             this->Controls->Add(this->buttonWroc);
@@ -115,6 +127,7 @@ namespace BankSystem {
             this->Text = L"Worker";
             this->ResumeLayout(false);
             this->PerformLayout();
+
         }
 
     private: System::Void buttonList_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -130,5 +143,9 @@ namespace BankSystem {
     private: System::Void buttonWroc_Click(System::Object^ sender, System::EventArgs^ e) {
         this->Hide();
     }
-    };
+    private: System::Void buttonDelete_Click(System::Object^ sender, System::EventArgs^ e) {
+        Usun^ usunForm = gcnew Usun(globalnaListaKont);
+        usunForm->Show();
+    }
+};
 }

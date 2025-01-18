@@ -140,6 +140,22 @@ std::istream& operator>>(std::istream& we, Konto& p)
 }
 
 
+std::string Konto::getAccountDetails() const {
+    return "Numer konta: " + getNumerKonta() + "\n" +
+        "Imiê: " + getImie() + "\n" +
+        "Drugie imiê: " + getDrugieImie() + "\n" +
+        "Nazwisko: " + getNazwisko() + "\n" +
+        "Numer telefonu: " + getNumerKierunkowy() + " " + getNumerTelefonu() + "\n" +
+        "Adres e-mail: " + getEmail() + "\n" +
+        "PESEL: " + getPesel() + "\n" +
+        "Seria dowodu: " + getSeriaDowodu() + "\n" +
+        "Numer dowodu: " + getNumerDowodu() + "\n" +
+        "Saldo: " + std::to_string(getSaldo());
+}
+
+
+
+
 
 
 

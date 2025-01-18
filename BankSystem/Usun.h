@@ -8,16 +8,16 @@ namespace BankSystem {
     using namespace System;
     using namespace System::Windows::Forms;
 
-    public ref class Lista : public System::Windows::Forms::Form {
+    public ref class Usun : public System::Windows::Forms::Form {
     public:
-        Lista(ListaKont* listaKont) {
+        Usun(ListaKont* listaKont) {
             InitializeComponent();
             this->listaKont = listaKont; // Przypisz wskaŸnik do istniej¹cej listy
             WyswietlKonta();            // Wyœwietl konta w ListBox
         }
 
     protected:
-        ~Lista() {
+        ~Usun() {
             if (components) {
                 delete components;
             }
@@ -48,9 +48,9 @@ namespace BankSystem {
             this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 22.2F));
             this->label1->Location = System::Drawing::Point(223, 9);
             this->label1->Name = L"label1";
-            this->label1->Size = System::Drawing::Size(188, 42);
+            this->label1->Size = System::Drawing::Size(218, 42);
             this->label1->TabIndex = 0;
-            this->label1->Text = L"Lista kont:";
+            this->label1->Text = L"Usuñ konto:";
             // 
             // buttonWroc
             // 
@@ -60,45 +60,45 @@ namespace BankSystem {
             this->buttonWroc->TabIndex = 8;
             this->buttonWroc->Text = L"Wróæ";
             this->buttonWroc->UseVisualStyleBackColor = true;
-            this->buttonWroc->Click += gcnew System::EventHandler(this, &Lista::buttonWroc_Click);
+            this->buttonWroc->Click += gcnew System::EventHandler(this, &Usun::buttonWroc_Click);
             // 
             // listBoxKonta
             // 
             this->listBoxKonta->FormattingEnabled = true;
             this->listBoxKonta->ItemHeight = 16;
-            this->listBoxKonta->Location = System::Drawing::Point(50, 65);
+            this->listBoxKonta->Location = System::Drawing::Point(50, 71);
             this->listBoxKonta->Name = L"listBoxKonta";
             this->listBoxKonta->Size = System::Drawing::Size(600, 292);
             this->listBoxKonta->TabIndex = 9;
-            this->listBoxKonta->Click += gcnew System::EventHandler(this, &Lista::listBoxKonta_Click);
+            this->listBoxKonta->Click += gcnew System::EventHandler(this, &Usun::listBoxKonta_Click);
             // 
             // textBoxSzukaj
             // 
-            this->textBoxSzukaj->Location = System::Drawing::Point(50, 398);
+            this->textBoxSzukaj->Location = System::Drawing::Point(50, 410);
             this->textBoxSzukaj->Name = L"textBoxSzukaj";
             this->textBoxSzukaj->Size = System::Drawing::Size(400, 22);
             this->textBoxSzukaj->TabIndex = 10;
             // 
             // buttonSzukaj
             // 
-            this->buttonSzukaj->Location = System::Drawing::Point(469, 398);
+            this->buttonSzukaj->Location = System::Drawing::Point(456, 406);
             this->buttonSzukaj->Name = L"buttonSzukaj";
             this->buttonSzukaj->Size = System::Drawing::Size(90, 30);
             this->buttonSzukaj->TabIndex = 11;
             this->buttonSzukaj->Text = L"Szukaj";
             this->buttonSzukaj->UseVisualStyleBackColor = true;
-            this->buttonSzukaj->Click += gcnew System::EventHandler(this, &Lista::buttonSzukaj_Click);
+            this->buttonSzukaj->Click += gcnew System::EventHandler(this, &Usun::buttonSzukaj_Click);
             // 
             // label2
             // 
             this->label2->AutoSize = true;
-            this->label2->Location = System::Drawing::Point(47, 379);
+            this->label2->Location = System::Drawing::Point(47, 391);
             this->label2->Name = L"label2";
-            this->label2->Size = System::Drawing::Size(216, 16);
-            this->label2->TabIndex = 12;
-            this->label2->Text = L"Podaj numer konta do wyszukania: ";
+            this->label2->Size = System::Drawing::Size(170, 13);
+            this->label2->TabIndex = 13;
+            this->label2->Text = L"Podaj numer konta do usuniêcia: ";
             // 
-            // Lista
+            // Usun
             // 
             this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
             this->ClientSize = System::Drawing::Size(700, 500);
@@ -108,9 +108,9 @@ namespace BankSystem {
             this->Controls->Add(this->listBoxKonta);
             this->Controls->Add(this->buttonWroc);
             this->Controls->Add(this->label1);
-            this->Name = L"Lista";
+            this->Name = L"Usun";
             this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-            this->Text = L"Lista";
+            this->Text = L"Usun";
             this->ResumeLayout(false);
             this->PerformLayout();
 
@@ -141,17 +141,26 @@ namespace BankSystem {
                     const Konto* konto = listaKont->Szukaj(numerKonta);
 
                     if (konto) {
-                        // Wywo³anie metody `getAccountDetails` i pokazanie MessageBox
-                        std::string details = konto->getAccountDetails();
-                        MessageBox::Show(gcnew String(details.c_str()), "Szczegó³y konta", MessageBoxButtons::OK, MessageBoxIcon::Information);
+                        System::Windows::Forms::DialogResult result = MessageBox::Show(
+                            gcnew String(konto->getAccountDetails().c_str()) + "\n\nCzy chcesz usun¹æ to konto?",
+                            "Potwierdzenie",
+                            MessageBoxButtons::YesNo,
+                            MessageBoxIcon::Question
+                        );
+
+                        if (result == System::Windows::Forms::DialogResult::Yes) {
+                            listaKont->Usun(*konto); // Usuñ konto z listy
+                            listaKont->ZapiszDoPliku("dane_klientow.txt"); // Zapisz zmiany do pliku
+                            MessageBox::Show("Konto zosta³o pomyœlnie usuniête.", "Sukces", MessageBoxButtons::OK, MessageBoxIcon::Information);
+                            WyswietlKonta(); // Odœwie¿ listê
+                        }
                     }
                     else {
-                        MessageBox::Show("Nie znaleziono konta.", "B³¹d", MessageBoxButtons::OK, MessageBoxIcon::Error);
+                        MessageBox::Show("Nie znaleziono konta.", "B³¹d");
                     }
                 }
             }
         }
-
 
         void buttonSzukaj_Click(System::Object^ sender, System::EventArgs^ e) {
             String^ szukanyNumer = textBoxSzukaj->Text;
@@ -164,16 +173,24 @@ namespace BankSystem {
             const Konto* konto = listaKont->Szukaj(numerKonta);
 
             if (konto) {
-                // Wywo³anie metody `getAccountDetails` i pokazanie MessageBox
-                std::string details = konto->getAccountDetails();
-                MessageBox::Show(gcnew String(details.c_str()), "Szczegó³y konta", MessageBoxButtons::OK, MessageBoxIcon::Information);
+                System::Windows::Forms::DialogResult result = MessageBox::Show(
+                    gcnew String(konto->getAccountDetails().c_str()) + "\n\nCzy chcesz usun¹æ to konto?",
+                    "Potwierdzenie",
+                    MessageBoxButtons::YesNo,
+                    MessageBoxIcon::Question
+                );
+
+                if (result == System::Windows::Forms::DialogResult::Yes) {
+                    listaKont->Usun(*konto); // Usuñ konto z listy
+                    listaKont->ZapiszDoPliku("dane_klientow.txt"); // Zapisz zmiany do pliku
+                    MessageBox::Show("Konto zosta³o pomyœlnie usuniête.", "Sukces", MessageBoxButtons::OK, MessageBoxIcon::Information);
+                    WyswietlKonta(); // Odœwie¿ listê
+                }
             }
             else {
-                MessageBox::Show("Nie znaleziono konta.", "B³¹d", MessageBoxButtons::OK, MessageBoxIcon::Error);
+                MessageBox::Show("Nie znaleziono konta o podanym numerze.", "B³¹d", MessageBoxButtons::OK, MessageBoxIcon::Error);
             }
-                
         }
-        
 
         void buttonWroc_Click(System::Object^ sender, System::EventArgs^ e) {
             listaKont->ZapiszDoPliku("dane_klientow.txt"); // Zapisz listê kont tylko raz przed zamkniêciem

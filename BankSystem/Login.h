@@ -78,6 +78,9 @@ namespace BankSystem {
             this->buttonZaloguj = (gcnew System::Windows::Forms::Button());
             this->buttonWroc = (gcnew System::Windows::Forms::Button());
             this->SuspendLayout();
+            // Ustawienia pól tekstowych z ograniczeniami
+            this->textBoxNrKonta->MaxLength = 26;
+            this->textBoxHaslo->PasswordChar = '*';
             // 
             // label1
             // 

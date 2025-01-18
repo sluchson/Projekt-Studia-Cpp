@@ -20,8 +20,7 @@ public:
 
     // Metody zarz¹dzania list¹
     void Dodaj(const Konto& konto);             // Dodaje konto do listy
-    void Usun(const Konto& wzorzec);            // Usuwa konto z listy
-    void WypiszKonta() const;                   // Wyœwietla wszystkie konta
+    void Usun(const Konto& wzorzec);            // Usuwa konto z listy              
     const Konto* Szukaj(const std::string& numerKonta) const; // Wyszukuje konto
 
     // Metody plikowe

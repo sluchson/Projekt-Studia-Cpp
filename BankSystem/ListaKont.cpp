@@ -86,28 +86,9 @@ void ListaKont::Usun(const Konto& wzorzec)
     }
 }
 
-// Wyœwietla wszystkie konta
-void ListaKont::WypiszKonta() const
-{
-    if (m_pPoczatek == nullptr) // Jeœli lista jest pusta
-    {
-        std::cout << "Brak kont w liscie." << std::endl;
-        return;
-    }
 
-    Konto* p = m_pPoczatek;
-    int i = 0;
-    while (p != nullptr) // Przechodzi przez listê
-    {
-        std::cout << i << "\t"; // Wyœwietla indeks
-        std::cout << "Numer konta: " << p->getNumerKonta() << std::endl;  // Wyœwietla numer konta
-        std::cout << "Imie: " << p->getImie() << std::endl; // Wyœwietla imiê
-        std::cout << "Nazwisko: " << p->getNazwisko() << std::endl; // Wyœwietla nazwisko
-        std::cout << std::endl;
-        p = p->m_pNastepny; // Przechodzi do nastêpnego elementu
-        i++;
-    }
-}
+
+
 
 // Szuka konta na podstawie numeru konta
 const Konto* ListaKont::Szukaj(const std::string& numerKonta) const

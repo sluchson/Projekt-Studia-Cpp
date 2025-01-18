@@ -119,6 +119,18 @@ namespace BankSystem {
 			this->label9 = (gcnew System::Windows::Forms::Label());
 			this->textBoxHaslo = (gcnew System::Windows::Forms::TextBox());
 			this->SuspendLayout();
+
+			// Ustawienia pól tekstowych z ograniczeniami
+			this->textBoxImie->MaxLength = 20;
+			this->textBoxDrugieImie->MaxLength = 20;
+			this->textBoxNazwisko->MaxLength = 30;
+			this->textBoxNrKierunkowy->MaxLength = 4;
+			this->textBoxNrTelefonu->MaxLength = 9;
+			this->textBoxEmail->MaxLength = 50;
+			this->textBoxPesel->MaxLength = 11;
+			this->textBoxSeriaDowodu->MaxLength = 3;
+			this->textBoxNrDowodu->MaxLength = 6;
+			this->textBoxHaslo->PasswordChar = '*';
 			// 
 			// buttonWroc
 			// 
@@ -377,6 +389,7 @@ namespace BankSystem {
 		}
 
 		void buttonZarejestruj_Click(System::Object^ sender, System::EventArgs^ e) {
+
 			if (!ValidateInputs()) return;
 
 			std::string imie = msclr::interop::marshal_as<std::string>(textBoxImie->Text);
@@ -399,9 +412,22 @@ namespace BankSystem {
 			// Zapisanie do pliku
 			globalnaListaKont->ZapiszDoPliku("dane_klientow.txt");
 
-			MessageBox::Show("Rejestracja zakoñczona sukcesem!", "Sukces", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			// Przekonwertowanie numeru konta na String^
+			System::String^ numerKontaString = gcnew System::String(noweKonto.getNumerKonta().c_str());
+
+			// Kopiowanie numeru konta do schowka
+			Clipboard::SetText(numerKontaString);
+
+			// Wyœwietlenie komunikatu z numerem konta
+			MessageBox::Show("Rejestracja zakoñczona sukcesem!\nNumer konta: " + numerKontaString +
+				"\nNumer zosta³ skopiowany do schowka.",
+				"Sukces",
+				MessageBoxButtons::OK,
+				MessageBoxIcon::Information);
+
 			this->Close();
 		}
+
 
 		void buttonWroc_Click(System::Object^ sender, System::EventArgs^ e) {
 			this->Close();

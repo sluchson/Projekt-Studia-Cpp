@@ -1,5 +1,6 @@
 #pragma once
 #include "Konto.h"
+#include "ListaTransakcji.h"
 
 namespace BankSystem {
 
@@ -24,7 +25,7 @@ namespace BankSystem {
 			// Ustawienie imienia na labelImie
 			labelImie->Text = gcnew System::String(klient->getImie().c_str());
 		}
-		
+
 	protected:
 		/// <summary>
 		/// Wyczyœæ wszystkie u¿ywane zasoby.
@@ -67,7 +68,7 @@ namespace BankSystem {
 		/// <summary>
 		/// Wymagana zmienna projektanta.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -195,9 +196,9 @@ namespace BankSystem {
 			this->label4->AutoSize = true;
 			this->label4->Location = System::Drawing::Point(419, 169);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(92, 16);
+			this->label4->Size = System::Drawing::Size(99, 16);
 			this->label4->TabIndex = 8;
-			this->label4->Text = L"Wp³aæ œrodki:";
+			this->label4->Text = L"Wyp³aæ œrodki:";
 			// 
 			// button3
 			// 
@@ -299,8 +300,8 @@ namespace BankSystem {
 		}
 #pragma endregion
 
-private: System::Void buttonBack_Click(System::Object^ sender, System::EventArgs^ e) {
-	this->Close();
-}
-};
+	private: System::Void buttonBack_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->Close();
+	}
+	};
 }

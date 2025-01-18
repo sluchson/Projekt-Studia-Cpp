@@ -76,6 +76,8 @@ public:
 
     // Metody
     static std::string ustalNumerKonta();
+    std::string getAccountDetails() const;
+
 
     friend std::ostream& operator<<(std::ostream& wy, const Konto& p);
     friend std::istream& operator>>(std::istream& we, Konto& p);
