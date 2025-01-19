@@ -34,7 +34,9 @@ namespace BankSystem {
 			// Ustawienie salda na labelSaldo
 			labelSaldo->Text = System::String::Format(L"{0:F2}", klient->getSaldo());
 			// Ustawienie imienia na labelImie
-			labelImie->Text = gcnew System::String(klient->getImie().c_str());
+			labelImie->Text = gcnew System::String((klient->getImie() + "!").c_str());
+			// Ustawienie numeru konta na labelNumerKonta
+			labelNumerKonta->Text = gcnew System::String(("Twój umer konta: " + klient->getNumerKonta()).c_str());
 			WczytajTransakcje();
 		}
 
@@ -72,6 +74,10 @@ namespace BankSystem {
 	private: System::Windows::Forms::Label^ label9;
 	private: System::Windows::Forms::ListBox^ listBoxTransakcje;
 	private: System::Windows::Forms::Label^ label10;
+	private: System::Windows::Forms::Label^ label11;
+	private: System::Windows::Forms::Label^ label12;
+	private: System::Windows::Forms::Label^ label13;
+	private: System::Windows::Forms::Label^ labelNumerKonta;
 
 	protected:
 
@@ -109,6 +115,10 @@ namespace BankSystem {
 			this->label9 = (gcnew System::Windows::Forms::Label());
 			this->listBoxTransakcje = (gcnew System::Windows::Forms::ListBox());
 			this->label10 = (gcnew System::Windows::Forms::Label());
+			this->label11 = (gcnew System::Windows::Forms::Label());
+			this->label12 = (gcnew System::Windows::Forms::Label());
+			this->label13 = (gcnew System::Windows::Forms::Label());
+			this->labelNumerKonta = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -116,7 +126,7 @@ namespace BankSystem {
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 19.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->label1->Location = System::Drawing::Point(5, 21);
+			this->label1->Location = System::Drawing::Point(3, 6);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(104, 37);
 			this->label1->TabIndex = 0;
@@ -127,7 +137,7 @@ namespace BankSystem {
 			this->labelImie->AutoSize = true;
 			this->labelImie->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 19.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->labelImie->Location = System::Drawing::Point(101, 21);
+			this->labelImie->Location = System::Drawing::Point(88, 6);
 			this->labelImie->Name = L"labelImie";
 			this->labelImie->Size = System::Drawing::Size(90, 37);
 			this->labelImie->TabIndex = 1;
@@ -136,7 +146,7 @@ namespace BankSystem {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(9, 69);
+			this->label2->Location = System::Drawing::Point(7, 90);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(87, 16);
 			this->label2->TabIndex = 2;
@@ -147,7 +157,7 @@ namespace BankSystem {
 			this->labelSaldo->AutoSize = true;
 			this->labelSaldo->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->labelSaldo->Location = System::Drawing::Point(8, 87);
+			this->labelSaldo->Location = System::Drawing::Point(6, 108);
 			this->labelSaldo->Name = L"labelSaldo";
 			this->labelSaldo->Size = System::Drawing::Size(30, 32);
 			this->labelSaldo->TabIndex = 3;
@@ -290,7 +300,7 @@ namespace BankSystem {
 			this->listBoxTransakcje->ItemHeight = 16;
 			this->listBoxTransakcje->Location = System::Drawing::Point(12, 169);
 			this->listBoxTransakcje->Name = L"listBoxTransakcje";
-			this->listBoxTransakcje->Size = System::Drawing::Size(243, 260);
+			this->listBoxTransakcje->Size = System::Drawing::Size(264, 260);
 			this->listBoxTransakcje->TabIndex = 19;
 			this->listBoxTransakcje->Click += gcnew System::EventHandler(this, &Home::listBoxTransakcje_Click);
 			// 
@@ -299,14 +309,54 @@ namespace BankSystem {
 			this->label10->AutoSize = true;
 			this->label10->Location = System::Drawing::Point(9, 150);
 			this->label10->Name = L"label10";
-			this->label10->Size = System::Drawing::Size(87, 16);
+			this->label10->Size = System::Drawing::Size(116, 16);
 			this->label10->TabIndex = 20;
-			this->label10->Text = L"Twoje œrodki:";
+			this->label10->Text = L"Historia transakcji:";
+			// 
+			// label11
+			// 
+			this->label11->AutoSize = true;
+			this->label11->Location = System::Drawing::Point(624, 44);
+			this->label11->Name = L"label11";
+			this->label11->Size = System::Drawing::Size(33, 16);
+			this->label11->TabIndex = 21;
+			this->label11->Text = L"PLN";
+			// 
+			// label12
+			// 
+			this->label12->AutoSize = true;
+			this->label12->Location = System::Drawing::Point(625, 191);
+			this->label12->Name = L"label12";
+			this->label12->Size = System::Drawing::Size(33, 16);
+			this->label12->TabIndex = 22;
+			this->label12->Text = L"PLN";
+			// 
+			// label13
+			// 
+			this->label13->AutoSize = true;
+			this->label13->Location = System::Drawing::Point(624, 314);
+			this->label13->Name = L"label13";
+			this->label13->Size = System::Drawing::Size(33, 16);
+			this->label13->TabIndex = 23;
+			this->label13->Text = L"PLN";
+			// 
+			// labelNumerKonta
+			// 
+			this->labelNumerKonta->AutoSize = true;
+			this->labelNumerKonta->Location = System::Drawing::Point(7, 44);
+			this->labelNumerKonta->Name = L"labelNumerKonta";
+			this->labelNumerKonta->Size = System::Drawing::Size(158, 16);
+			this->labelNumerKonta->TabIndex = 24;
+			this->labelNumerKonta->Text = L"Numer konta u¿ytkownika";
 			// 
 			// Home
 			// 
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
 			this->ClientSize = System::Drawing::Size(700, 500);
+			this->Controls->Add(this->labelNumerKonta);
+			this->Controls->Add(this->label13);
+			this->Controls->Add(this->label12);
+			this->Controls->Add(this->label11);
 			this->Controls->Add(this->label10);
 			this->Controls->Add(this->listBoxTransakcje);
 			this->Controls->Add(this->label9);

@@ -343,7 +343,8 @@ namespace BankSystem {
 				regexEmail("^[\\w.%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$"),
 				regexNumbers("^[0-9]+$"),
 				regexSeries("^[A-Z]{3}$"),
-				regexPhone("^\\+?[0-9]{9,12}$");
+				regexPhone("^\\+?[0-9]{9,12}$"), // Dopuszcza numer kierunkowy z "+" i cyframi
+				regexCountryCode("^\\+[0-9]+$"); // Numer kierunkowy musi zaczynaæ siê od "+" i zawieraæ cyfry
 
 			if (!std::regex_match(msclr::interop::marshal_as<std::string>(textBoxImie->Text), regexLetters)) {
 				MessageBox::Show("Nieprawid³owe imiê. Musi zaczynaæ siê wielk¹ liter¹ i zawieraæ tylko litery.", "B³¹d", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -351,12 +352,17 @@ namespace BankSystem {
 			}
 
 			if (!std::regex_match(msclr::interop::marshal_as<std::string>(textBoxDrugieImie->Text), regexLetters)) {
-				MessageBox::Show("Nieprawid³owe drugie imiê.", "B³¹d", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				MessageBox::Show("Nieprawid³owe drugie imiê. (W przypadku braku wpisaæ 'Brak')", "B³¹d", MessageBoxButtons::OK, MessageBoxIcon::Error);
 				return false;
 			}
 
 			if (!std::regex_match(msclr::interop::marshal_as<std::string>(textBoxNazwisko->Text), regexLetters)) {
 				MessageBox::Show("Nieprawid³owe nazwisko.", "B³¹d", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				return false;
+			}
+
+			if (!std::regex_match(msclr::interop::marshal_as<std::string>(textBoxNrKierunkowy->Text), regexCountryCode)) {
+				MessageBox::Show("Nieprawid³owy numer kierunkowy. Musi zaczynaæ siê od '+' i zawieraæ tylko cyfry.", "B³¹d", MessageBoxButtons::OK, MessageBoxIcon::Error);
 				return false;
 			}
 
@@ -387,6 +393,7 @@ namespace BankSystem {
 
 			return true;
 		}
+
 
 		void buttonZarejestruj_Click(System::Object^ sender, System::EventArgs^ e) {
 
