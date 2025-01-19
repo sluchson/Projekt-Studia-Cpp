@@ -188,6 +188,7 @@ namespace BankSystem {
 			this->textBoxKwotaWplata->Name = L"textBoxKwotaWplata";
 			this->textBoxKwotaWplata->Size = System::Drawing::Size(200, 22);
 			this->textBoxKwotaWplata->TabIndex = 6;
+			this->textBoxKwotaWplata->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &Home::KwotaTextBox_KeyPress);
 			// 
 			// buttonWplac
 			// 
@@ -215,6 +216,7 @@ namespace BankSystem {
 			this->textBoxKwotaWyplata->Name = L"textBoxKwotaWyplata";
 			this->textBoxKwotaWyplata->Size = System::Drawing::Size(200, 22);
 			this->textBoxKwotaWyplata->TabIndex = 9;
+			this->textBoxKwotaWyplata->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &Home::KwotaTextBox_KeyPress);
 			// 
 			// label4
 			// 
@@ -241,6 +243,7 @@ namespace BankSystem {
 			this->textBoxKwotaPrzelew->Name = L"textBoxKwotaPrzelew";
 			this->textBoxKwotaPrzelew->Size = System::Drawing::Size(200, 22);
 			this->textBoxKwotaPrzelew->TabIndex = 12;
+			this->textBoxKwotaPrzelew->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &Home::KwotaTextBox_KeyPress);
 			// 
 			// label5
 			// 
@@ -343,9 +346,11 @@ namespace BankSystem {
 			// labelNumerKonta
 			// 
 			this->labelNumerKonta->AutoSize = true;
+			this->labelNumerKonta->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(238)));
 			this->labelNumerKonta->Location = System::Drawing::Point(7, 44);
 			this->labelNumerKonta->Name = L"labelNumerKonta";
-			this->labelNumerKonta->Size = System::Drawing::Size(158, 16);
+			this->labelNumerKonta->Size = System::Drawing::Size(254, 23);
 			this->labelNumerKonta->TabIndex = 24;
 			this->labelNumerKonta->Text = L"Numer konta u¿ytkownika";
 			// 
@@ -386,6 +391,29 @@ namespace BankSystem {
 
 		}
 #pragma endregion
+private: System::Void KwotaTextBox_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
+	// Akceptuj tylko cyfry, kropkê oraz backspace
+	if (!Char::IsDigit(e->KeyChar) && e->KeyChar != ',' && e->KeyChar != '\b') {
+		e->Handled = true;
+		return;
+	}
+
+	// SprawdŸ, czy wprowadzenie znaku '.' jest zgodne z zasadami
+	TextBox^ textBox = dynamic_cast<TextBox^>(sender);
+	if (e->KeyChar == ',') {
+		if (textBox->Text->Contains(",")) {
+			e->Handled = true; // Nie pozwól na wiêcej ni¿ jedn¹ kropkê
+		}
+	}
+
+	// SprawdŸ, czy liczba po kropce nie przekracza dwóch miejsc dziesiêtnych
+	if (Char::IsDigit(e->KeyChar) && textBox->Text->Contains(",")) {
+		int dotIndex = textBox->Text->IndexOf(",");
+		if (textBox->SelectionStart > dotIndex && textBox->Text->Length - dotIndex > 2) {
+			e->Handled = true;
+		}
+	}
+}
 
 private: void WczytajTransakcje() {
 	listBoxTransakcje->Items->Clear(); // Wyczyœæ ListBox przed za³adowaniem danych
