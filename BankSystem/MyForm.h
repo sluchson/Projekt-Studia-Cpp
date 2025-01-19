@@ -38,7 +38,7 @@ namespace BankSystem {
 			//
 
 		}
-		System::String^ aktualnyUzytkownik;
+	System::String^ aktualnyUzytkownik;
 	private: System::Windows::Forms::Button^ buttonKonta;
 	private: System::Windows::Forms::Button^ buttonUzytkownik;
 	private: System::Windows::Forms::Button^ buttonZamknij;
@@ -90,7 +90,7 @@ namespace BankSystem {
 				static_cast<System::Byte>(238)));
 			this->label1->Location = System::Drawing::Point(142, 67);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(586, 82);
+			this->label1->Size = System::Drawing::Size(488, 69);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"System Bankowy";
 			// 
@@ -102,7 +102,7 @@ namespace BankSystem {
 			this->buttonKonta->Name = L"buttonKonta";
 			this->buttonKonta->Size = System::Drawing::Size(200, 100);
 			this->buttonKonta->TabIndex = 5;
-			this->buttonKonta->Text = L"Konta";
+			this->buttonKonta->Text = L"Pracownik";
 			this->buttonKonta->UseVisualStyleBackColor = true;
 			this->buttonKonta->Click += gcnew System::EventHandler(this, &MyForm::buttonKonta_Click);
 			// 
@@ -149,7 +149,7 @@ namespace BankSystem {
 
 
 private: System::Void buttonUzytkownik_Click(System::Object^ sender, System::EventArgs^ e) {
-	Login^ loginForm = gcnew Login();
+	Login^ loginForm = gcnew Login(globalnaListaKont);
 	loginForm->Show();
 	
 }

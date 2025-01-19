@@ -8,8 +8,8 @@
 
 class ListaKont {
 private:
-    Konto* m_pPoczatek; // WskaŸnik na pierwszy element w liœcie
-    int m_nLiczbaKont;  // Liczba kont w liœcie
+    Konto* m_pPoczatek; // Wskaznik na pierwszy element w liscie
+    int m_nLiczbaKont;  // Liczba kont w liscie
 
 public:
     // Konstruktor
@@ -18,14 +18,14 @@ public:
     // Destruktor
     ~ListaKont();
 
-    // Metody zarz¹dzania list¹
+    // Metody zarzadzania lista
     void Dodaj(const Konto& konto);             // Dodaje konto do listy
     void Usun(const Konto& wzorzec);            // Usuwa konto z listy              
-    const Konto* Szukaj(const std::string& numerKonta) const; // Wyszukuje konto
+    Konto* Szukaj(const std::string& numerKonta) const; // Wyszukuje konto
 
     // Metody plikowe
-    void ZapiszDoPliku(const char* nazwaPliku) const; // Zapisuje listê kont do pliku
-    void OdczytZPliku(const char* nazwaPliku);        // Odczytuje listê kont z pliku
+    void ZapiszDoPliku(const char* nazwaPliku) const; // Zapisuje liste kont do pliku
+    void OdczytZPliku(const char* nazwaPliku);        // Odczytuje liste kont z pliku
 
     // Getter dla pierwszego elementu
     Konto* getPoczatek() const { return m_pPoczatek; }

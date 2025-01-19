@@ -1,4 +1,3 @@
-
 #pragma once
 #include <string>
 
@@ -17,12 +16,9 @@ private:
     std::string haslo;
     double saldo;
 
-
-
 public:
 
     Konto() : saldo(0.0) {} // Domyœlny konstruktor inicjuje saldo na 0
-
 
     Konto* m_pNastepny;
     Konto* m_pPoprzedni;

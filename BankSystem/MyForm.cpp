@@ -3,8 +3,10 @@
 #include "Konto.h"
 #include "ListaKont.h"
 
+
 // Globalny wskaŸnik na listê kont
 ListaKont* globalnaListaKont = nullptr;
+
 
 using namespace System;
 using namespace System::Windows::Forms;
@@ -14,6 +16,7 @@ void main(array<String^>^ args) {
     // Inicjalizacja globalnej listy kont
     globalnaListaKont = new ListaKont();
     globalnaListaKont->Inicjalizuj("dane_klientow.txt");
+
 
     Application::EnableVisualStyles();
     Application::SetCompatibleTextRenderingDefault(false);

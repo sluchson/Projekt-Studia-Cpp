@@ -124,11 +124,9 @@
     <ClCompile Include="Konto.cpp" />
     <ClCompile Include="Lista.cpp" />
     <ClCompile Include="ListaKont.cpp" />
-    <ClCompile Include="ListaTransakcji.cpp" />
     <ClCompile Include="Login.cpp" />
     <ClCompile Include="MyForm.cpp" />
     <ClCompile Include="Register.cpp" />
-    <ClCompile Include="Transakcja.cpp" />
     <ClCompile Include="Usun.cpp" />
     <ClCompile Include="Worker.cpp" />
   </ItemGroup>
@@ -140,18 +138,16 @@
     <ClInclude Include="Lista.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="ListaKont.h" />
-    <ClInclude Include="ListaTransakcji.h" />
     <ClInclude Include="Login.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="MyForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="ListaKont.h" />
     <ClInclude Include="Register.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="Transakcja.h" />
     <ClInclude Include="Usun.h">
       <FileType>CppForm</FileType>
     </ClInclude>

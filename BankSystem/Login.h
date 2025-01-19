@@ -11,7 +11,6 @@
 #include <regex>
 #include <msclr/marshal_cppstd.h>
 
-extern ListaKont* globalnaListaKont;
 
 namespace BankSystem {
 
@@ -28,9 +27,10 @@ namespace BankSystem {
     public ref class Login : public System::Windows::Forms::Form
     {
     public:
-        Login(void)
+        Login(ListaKont* listaKont)
         {
             InitializeComponent();
+            this->listaKont = listaKont;
         }
 
     protected:
@@ -174,16 +174,9 @@ namespace BankSystem {
             return;
         }
 
-        const Konto* znalezioneKonto = globalnaListaKont->Szukaj(nrKonta);
+        Konto* znalezioneKonto = listaKont->Szukaj(nrKonta);
         if (znalezioneKonto && znalezioneKonto->getHaslo() == hasloText) {
-            MessageBox::Show("Zalogowano pomyœlnie!", "Sukces");
-
-            // Zapisz dane zalogowanego u¿ytkownika
-            aktualnyUzytkownik = textBoxNrKonta->Text;
-            zalogowanyKlient = new Konto(*znalezioneKonto); // Tworzy kopiê konta
-
-            // Przeka¿ dane do formularza Home
-            Home^ homeForm = gcnew Home(zalogowanyKlient);
+            Home^ homeForm = gcnew Home(znalezioneKonto, listaKont);
             homeForm->Show();
             this->Close();
         }

@@ -91,19 +91,18 @@ void ListaKont::Usun(const Konto& wzorzec)
 
 
 // Szuka konta na podstawie numeru konta
-const Konto* ListaKont::Szukaj(const std::string& numerKonta) const
-{
+Konto* ListaKont::Szukaj(const std::string& numerKonta) const {
     Konto* test = m_pPoczatek;
-    while (test != nullptr) // Przechodzi przez listê
-    {
-        if (test->getNumerKonta() == numerKonta) // Szuka konta po numerze
-        {
-            return test; // Zwraca znalezione konto
+    while (test != nullptr) {
+        if (test->getNumerKonta() == numerKonta) {
+            return test; // Zwraca wskaŸnik na znalezione konto
         }
-        test = test->m_pNastepny; // Przechodzi do nastêpnego elementu
+        test = test->m_pNastepny;
     }
-    return nullptr; // Jeœli konta nie ma, zwraca `nullptr`
+    return nullptr;
 }
+
+
 
 void ListaKont::ZapiszDoPliku(const char* nazwaPliku) const
 {

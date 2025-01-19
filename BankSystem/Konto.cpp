@@ -9,12 +9,6 @@
 #include <sstream>
 #include <vector>
 
-
-
-
-// Globalny kontener na obiekty Konto
-std::vector<Konto*> listaKlientow;
-
 Konto::Konto(
     const std::string& imie,
     const std::string& drugieImie,
