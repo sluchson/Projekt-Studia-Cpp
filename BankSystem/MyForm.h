@@ -1,17 +1,8 @@
 #pragma once
-#include "Register.h"
-#include "Konto.h"
-#include "Home.h"
 #include "Login.h"
 #include "Worker.h"
-#include "Lista.h"
-#include "ListaKont.h"
-
-#include <vector>
-#include <fstream>
-#include <sstream>
 #include <string>
-#include <iostream>	
+
 
 
 
@@ -33,27 +24,12 @@ namespace BankSystem {
 		MyForm(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: W tym miejscu dodaj kod konstruktora
-			//
 
 		}
 	System::String^ aktualnyUzytkownik;
-	private: System::Windows::Forms::Button^ buttonKonta;
-	private: System::Windows::Forms::Button^ buttonUzytkownik;
-	private: System::Windows::Forms::Button^ buttonZamknij;
 
-
-	public:
-
-	public:
-
-		   Konto* zalogowanyKlient;  // U¿ywamy wskaŸnika zarz¹dzanego do obiektu Konto
 		
 	protected:
-		/// <summary>
-		/// Wyczyœæ wszystkie u¿ywane zasoby.
-		/// </summary>
 		~MyForm()
 		{
 			if (components)
@@ -62,19 +38,12 @@ namespace BankSystem {
 			}
 		}
 	private: System::Windows::Forms::Label^ label1;
-	protected:
+	private: System::ComponentModel::Container ^components;
+	private: System::Windows::Forms::Button^ buttonKonta;
+	private: System::Windows::Forms::Button^ buttonUzytkownik;
+	private: System::Windows::Forms::Button^ buttonZamknij;
 
-	private:
-		/// <summary>
-		/// Wymagana zmienna projektanta.
-		/// </summary>
-		System::ComponentModel::Container ^components;
-
-#pragma region Windows Form Designer generated code
-		/// <summary>
-		/// Metoda wymagana do obs³ugi projektanta — nie nale¿y modyfikowaæ
-		/// jej zawartoœci w edytorze kodu.
-		/// </summary>
+#pragma region 
 		void InitializeComponent(void)
 		{
 			this->label1 = (gcnew System::Windows::Forms::Label());
@@ -132,10 +101,12 @@ namespace BankSystem {
 			// 
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
 			this->ClientSize = System::Drawing::Size(700, 500);
+			this->ControlBox = false;
 			this->Controls->Add(this->buttonZamknij);
 			this->Controls->Add(this->buttonUzytkownik);
 			this->Controls->Add(this->buttonKonta);
 			this->Controls->Add(this->label1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Name = L"MyForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"MyForm";
@@ -144,9 +115,6 @@ namespace BankSystem {
 
 		}
 #pragma endregion
-	
-
-
 
 private: System::Void buttonUzytkownik_Click(System::Object^ sender, System::EventArgs^ e) {
 	Login^ loginForm = gcnew Login(globalnaListaKont);

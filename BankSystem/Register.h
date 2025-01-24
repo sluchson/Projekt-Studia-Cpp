@@ -119,18 +119,6 @@ namespace BankSystem {
 			this->label9 = (gcnew System::Windows::Forms::Label());
 			this->textBoxHaslo = (gcnew System::Windows::Forms::TextBox());
 			this->SuspendLayout();
-
-			// Ustawienia pól tekstowych z ograniczeniami
-			this->textBoxImie->MaxLength = 20;
-			this->textBoxDrugieImie->MaxLength = 20;
-			this->textBoxNazwisko->MaxLength = 30;
-			this->textBoxNrKierunkowy->MaxLength = 4;
-			this->textBoxNrTelefonu->MaxLength = 9;
-			this->textBoxEmail->MaxLength = 50;
-			this->textBoxPesel->MaxLength = 11;
-			this->textBoxSeriaDowodu->MaxLength = 3;
-			this->textBoxNrDowodu->MaxLength = 6;
-			this->textBoxHaslo->PasswordChar = '*';
 			// 
 			// buttonWroc
 			// 
@@ -145,6 +133,7 @@ namespace BankSystem {
 			// textBoxImie
 			// 
 			this->textBoxImie->Location = System::Drawing::Point(38, 128);
+			this->textBoxImie->MaxLength = 20;
 			this->textBoxImie->Name = L"textBoxImie";
 			this->textBoxImie->Size = System::Drawing::Size(200, 22);
 			this->textBoxImie->TabIndex = 1;
@@ -152,6 +141,7 @@ namespace BankSystem {
 			// textBoxDrugieImie
 			// 
 			this->textBoxDrugieImie->Location = System::Drawing::Point(38, 180);
+			this->textBoxDrugieImie->MaxLength = 20;
 			this->textBoxDrugieImie->Name = L"textBoxDrugieImie";
 			this->textBoxDrugieImie->Size = System::Drawing::Size(200, 22);
 			this->textBoxDrugieImie->TabIndex = 2;
@@ -159,6 +149,7 @@ namespace BankSystem {
 			// textBoxNazwisko
 			// 
 			this->textBoxNazwisko->Location = System::Drawing::Point(38, 239);
+			this->textBoxNazwisko->MaxLength = 30;
 			this->textBoxNazwisko->Name = L"textBoxNazwisko";
 			this->textBoxNazwisko->Size = System::Drawing::Size(200, 22);
 			this->textBoxNazwisko->TabIndex = 3;
@@ -166,20 +157,15 @@ namespace BankSystem {
 			// textBoxNrKierunkowy
 			// 
 			this->textBoxNrKierunkowy->Location = System::Drawing::Point(38, 297);
+			this->textBoxNrKierunkowy->MaxLength = 4;
 			this->textBoxNrKierunkowy->Name = L"textBoxNrKierunkowy";
 			this->textBoxNrKierunkowy->Size = System::Drawing::Size(44, 22);
 			this->textBoxNrKierunkowy->TabIndex = 4;
 			// 
-			// textBoxNrTelefonu
-			// 
-			this->textBoxNrTelefonu->Location = System::Drawing::Point(88, 297);
-			this->textBoxNrTelefonu->Name = L"textBoxNrTelefonu";
-			this->textBoxNrTelefonu->Size = System::Drawing::Size(150, 22);
-			this->textBoxNrTelefonu->TabIndex = 5;
-			// 
 			// textBoxEmail
 			// 
 			this->textBoxEmail->Location = System::Drawing::Point(313, 133);
+			this->textBoxEmail->MaxLength = 50;
 			this->textBoxEmail->Name = L"textBoxEmail";
 			this->textBoxEmail->Size = System::Drawing::Size(200, 22);
 			this->textBoxEmail->TabIndex = 6;
@@ -187,6 +173,7 @@ namespace BankSystem {
 			// textBoxPesel
 			// 
 			this->textBoxPesel->Location = System::Drawing::Point(316, 180);
+			this->textBoxPesel->MaxLength = 11;
 			this->textBoxPesel->Name = L"textBoxPesel";
 			this->textBoxPesel->Size = System::Drawing::Size(200, 22);
 			this->textBoxPesel->TabIndex = 7;
@@ -194,6 +181,7 @@ namespace BankSystem {
 			// textBoxSeriaDowodu
 			// 
 			this->textBoxSeriaDowodu->Location = System::Drawing::Point(316, 232);
+			this->textBoxSeriaDowodu->MaxLength = 3;
 			this->textBoxSeriaDowodu->Name = L"textBoxSeriaDowodu";
 			this->textBoxSeriaDowodu->Size = System::Drawing::Size(60, 22);
 			this->textBoxSeriaDowodu->TabIndex = 8;
@@ -264,9 +252,18 @@ namespace BankSystem {
 			// textBoxNrDowodu
 			// 
 			this->textBoxNrDowodu->Location = System::Drawing::Point(382, 232);
+			this->textBoxNrDowodu->MaxLength = 6;
 			this->textBoxNrDowodu->Name = L"textBoxNrDowodu";
 			this->textBoxNrDowodu->Size = System::Drawing::Size(134, 22);
 			this->textBoxNrDowodu->TabIndex = 16;
+			// 
+			// textBoxNrTelefonu
+			// 
+			this->textBoxNrTelefonu->Location = System::Drawing::Point(88, 297);
+			this->textBoxNrTelefonu->MaxLength = 9;
+			this->textBoxNrTelefonu->Name = L"textBoxNrTelefonu";
+			this->textBoxNrTelefonu->Size = System::Drawing::Size(150, 22);
+			this->textBoxNrTelefonu->TabIndex = 5;
 			// 
 			// label8
 			// 
@@ -302,6 +299,7 @@ namespace BankSystem {
 			// 
 			this->textBoxHaslo->Location = System::Drawing::Point(313, 347);
 			this->textBoxHaslo->Name = L"textBoxHaslo";
+			this->textBoxHaslo->PasswordChar = '*';
 			this->textBoxHaslo->Size = System::Drawing::Size(200, 22);
 			this->textBoxHaslo->TabIndex = 19;
 			// 
@@ -309,6 +307,7 @@ namespace BankSystem {
 			// 
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
 			this->ClientSize = System::Drawing::Size(700, 500);
+			this->ControlBox = false;
 			this->Controls->Add(this->label9);
 			this->Controls->Add(this->textBoxHaslo);
 			this->Controls->Add(this->buttonZarejestruj);
@@ -330,6 +329,7 @@ namespace BankSystem {
 			this->Controls->Add(this->textBoxDrugieImie);
 			this->Controls->Add(this->textBoxImie);
 			this->Controls->Add(this->buttonWroc);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Name = L"Register";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Register";
@@ -343,7 +343,7 @@ namespace BankSystem {
 				regexEmail("^[\\w.%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$"),
 				regexNumbers("^[0-9]+$"),
 				regexSeries("^[A-Z]{3}$"),
-				regexPhone("^\\+?[0-9]{9,12}$"), // Dopuszcza numer kierunkowy z "+" i cyframi
+				regexPhone("^\\+?[0-9]{9}$"), // Dopuszcza numer kierunkowy z "+" i cyframi
 				regexCountryCode("^\\+[0-9]+$"); // Numer kierunkowy musi zaczynaæ siê od "+" i zawieraæ cyfry
 
 			if (!std::regex_match(msclr::interop::marshal_as<std::string>(textBoxImie->Text), regexLetters)) {

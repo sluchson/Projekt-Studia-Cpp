@@ -117,11 +117,13 @@ namespace BankSystem {
             // 
             this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
             this->ClientSize = System::Drawing::Size(700, 500);
+            this->ControlBox = false;
             this->Controls->Add(this->buttonWroc);
             this->Controls->Add(this->buttonDelete);
             this->Controls->Add(this->buttonRegister);
             this->Controls->Add(this->buttonList);
             this->Controls->Add(this->label1);
+            this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
             this->Name = L"Worker";
             this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
             this->Text = L"Worker";
@@ -131,7 +133,7 @@ namespace BankSystem {
         }
 
     private: System::Void buttonList_Click(System::Object^ sender, System::EventArgs^ e) {
-        Lista^ listaForm = gcnew Lista(globalnaListaKont); // Przeka¿ istniej¹c¹ instancjê ListaKont
+        Lista^ listaForm = gcnew Lista(globalnaListaKont); // Przeka¿ istniej¹c¹ ListaKont
         listaForm->ShowDialog();
     }
 

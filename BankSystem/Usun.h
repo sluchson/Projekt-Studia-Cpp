@@ -64,6 +64,7 @@ namespace BankSystem {
             // 
             // listBoxKonta
             // 
+            this->listBoxKonta->ForeColor = System::Drawing::SystemColors::HotTrack;
             this->listBoxKonta->FormattingEnabled = true;
             this->listBoxKonta->ItemHeight = 16;
             this->listBoxKonta->Location = System::Drawing::Point(50, 71);
@@ -94,7 +95,7 @@ namespace BankSystem {
             this->label2->AutoSize = true;
             this->label2->Location = System::Drawing::Point(47, 391);
             this->label2->Name = L"label2";
-            this->label2->Size = System::Drawing::Size(170, 13);
+            this->label2->Size = System::Drawing::Size(204, 16);
             this->label2->TabIndex = 13;
             this->label2->Text = L"Podaj numer konta do usuniêcia: ";
             // 
@@ -102,12 +103,14 @@ namespace BankSystem {
             // 
             this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
             this->ClientSize = System::Drawing::Size(700, 500);
+            this->ControlBox = false;
             this->Controls->Add(this->label2);
             this->Controls->Add(this->buttonSzukaj);
             this->Controls->Add(this->textBoxSzukaj);
             this->Controls->Add(this->listBoxKonta);
             this->Controls->Add(this->buttonWroc);
             this->Controls->Add(this->label1);
+            this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
             this->Name = L"Usun";
             this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
             this->Text = L"Usun";

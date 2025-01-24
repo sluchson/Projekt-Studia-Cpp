@@ -120,6 +120,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Bankomat.cpp" />
     <ClCompile Include="Home.cpp" />
     <ClCompile Include="Konto.cpp" />
     <ClCompile Include="Lista.cpp" />
@@ -131,6 +132,9 @@
     <ClCompile Include="Worker.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bankomat.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Home.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -156,6 +160,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Bankomat.resx">
+      <DependentUpon>Bankomat.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Home.resx">
       <DependentUpon>Home.h</DependentUpon>
     </EmbeddedResource>

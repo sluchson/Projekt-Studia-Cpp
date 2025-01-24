@@ -114,7 +114,6 @@ std::istream& operator>>(std::istream& we, Konto& p)
             // Konwersja string -> double dla salda
             double saldo = std::stod(saldoStr);
 
-            // Ustawianie pól za pomoc¹ setterów
             p.setNumerKonta(numerKonta);
             p.setHaslo(haslo);
             p.setSaldo(saldo);
@@ -129,12 +128,16 @@ std::istream& operator>>(std::istream& we, Konto& p)
             p.setNumerDowodu(numerDowodu);
         }
     }
-
     return we;
 }
 
 
 std::string Konto::getAccountDetails() const {
+    std::ostringstream oss;
+    oss.precision(2); // Ustawienie precyzji na 2 miejsca
+    oss << std::fixed; // Ustawienie zapisu w formacie dziesiêtnym z miejscami po przecinku
+    oss << getSaldo();
+
     return "Numer konta: " + getNumerKonta() + "\n" +
         "Imiê: " + getImie() + "\n" +
         "Drugie imiê: " + getDrugieImie() + "\n" +
@@ -144,12 +147,5 @@ std::string Konto::getAccountDetails() const {
         "PESEL: " + getPesel() + "\n" +
         "Seria dowodu: " + getSeriaDowodu() + "\n" +
         "Numer dowodu: " + getNumerDowodu() + "\n" +
-        "Saldo: " + std::to_string(getSaldo());
+        "Saldo: " + oss.str();
 }
-
-
-
-
-
-
-

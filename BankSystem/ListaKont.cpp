@@ -3,10 +3,7 @@
 #include <fstream>
 
 // Konstruktor domyœlny
-ListaKont::ListaKont()
-    : m_nLiczbaKont(0), m_pPoczatek(nullptr)
-{
-}
+ListaKont::ListaKont(): m_nLiczbaKont(0), m_pPoczatek(nullptr){}
 
 // Destruktor zwalniaj¹cy pamiêæ
 ListaKont::~ListaKont()

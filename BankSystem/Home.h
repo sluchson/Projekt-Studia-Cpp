@@ -36,7 +36,7 @@ namespace BankSystem {
 			// Ustawienie imienia na labelImie
 			labelImie->Text = gcnew System::String((klient->getImie() + "!").c_str());
 			// Ustawienie numeru konta na labelNumerKonta
-			labelNumerKonta->Text = gcnew System::String(("Twój umer konta: " + klient->getNumerKonta()).c_str());
+			labelNumerKonta->Text = gcnew System::String(("Twój numer konta: " + klient->getNumerKonta()).c_str());
 			WczytajTransakcje();
 		}
 
@@ -78,6 +78,7 @@ namespace BankSystem {
 	private: System::Windows::Forms::Label^ label12;
 	private: System::Windows::Forms::Label^ label13;
 	private: System::Windows::Forms::Label^ labelNumerKonta;
+
 
 	protected:
 
@@ -299,6 +300,7 @@ namespace BankSystem {
 			// 
 			// listBoxTransakcje
 			// 
+			this->listBoxTransakcje->ForeColor = System::Drawing::Color::Firebrick;
 			this->listBoxTransakcje->FormattingEnabled = true;
 			this->listBoxTransakcje->ItemHeight = 16;
 			this->listBoxTransakcje->Location = System::Drawing::Point(12, 169);
@@ -346,18 +348,17 @@ namespace BankSystem {
 			// labelNumerKonta
 			// 
 			this->labelNumerKonta->AutoSize = true;
-			this->labelNumerKonta->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
-			this->labelNumerKonta->Location = System::Drawing::Point(7, 44);
+			this->labelNumerKonta->Location = System::Drawing::Point(7, 47);
 			this->labelNumerKonta->Name = L"labelNumerKonta";
-			this->labelNumerKonta->Size = System::Drawing::Size(254, 23);
+			this->labelNumerKonta->Size = System::Drawing::Size(86, 16);
 			this->labelNumerKonta->TabIndex = 24;
-			this->labelNumerKonta->Text = L"Numer konta u¿ytkownika";
+			this->labelNumerKonta->Text = L"Numer konta:";
 			// 
 			// Home
 			// 
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
 			this->ClientSize = System::Drawing::Size(700, 500);
+			this->ControlBox = false;
 			this->Controls->Add(this->labelNumerKonta);
 			this->Controls->Add(this->label13);
 			this->Controls->Add(this->label12);
@@ -383,6 +384,7 @@ namespace BankSystem {
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->labelImie);
 			this->Controls->Add(this->label1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Name = L"Home";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Home";
@@ -490,9 +492,6 @@ private: void UpdateSaldoLabel() {
 		 labelSaldo->Text = System::String::Format(L"{0:F2}", klient->getSaldo());
 }
 
-private: System::Void buttonBack_Click(System::Object^ sender, System::EventArgs^ e) {
-	this->Close();
-}
 
 private: System::Void buttonWplac_Click(System::Object^ sender, System::EventArgs^ e) {
 	try {
@@ -566,6 +565,11 @@ private: System::Void buttonPrzelej_Click(System::Object^ sender, System::EventA
 	catch (Exception^ ex) {
 		MessageBox::Show("B³¹d podczas przelewu: " + ex->Message, "B³¹d", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
+}
+
+
+private: System::Void buttonBack_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->Close();
 }
 
 };

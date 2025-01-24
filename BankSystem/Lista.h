@@ -64,6 +64,7 @@ namespace BankSystem {
             // 
             // listBoxKonta
             // 
+            this->listBoxKonta->ForeColor = System::Drawing::SystemColors::HotTrack;
             this->listBoxKonta->FormattingEnabled = true;
             this->listBoxKonta->ItemHeight = 16;
             this->listBoxKonta->Location = System::Drawing::Point(50, 65);
@@ -102,12 +103,14 @@ namespace BankSystem {
             // 
             this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
             this->ClientSize = System::Drawing::Size(700, 500);
+            this->ControlBox = false;
             this->Controls->Add(this->label2);
             this->Controls->Add(this->buttonSzukaj);
             this->Controls->Add(this->textBoxSzukaj);
             this->Controls->Add(this->listBoxKonta);
             this->Controls->Add(this->buttonWroc);
             this->Controls->Add(this->label1);
+            this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
             this->Name = L"Lista";
             this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
             this->Text = L"Lista";
@@ -176,7 +179,6 @@ namespace BankSystem {
         
 
         void buttonWroc_Click(System::Object^ sender, System::EventArgs^ e) {
-            listaKont->ZapiszDoPliku("dane_klientow.txt"); // Zapisz listê kont tylko raz przed zamkniêciem
             this->Close(); // Zamknij formularz
         }
     };
