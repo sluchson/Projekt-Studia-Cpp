@@ -39,6 +39,8 @@ namespace BankSystem {
         ListaKont* listaKont;
         Konto* klient;
 
+    private: System::Windows::Forms::Label^ labelKwotaWplata;
+    private: System::Windows::Forms::Label^ labelKwotaWyplata;
     private: System::Windows::Forms::Label^ labelSaldo;
     private: System::Windows::Forms::Label^ label2;
     private: System::Windows::Forms::TextBox^ textBoxKwotaWplata;
@@ -74,6 +76,8 @@ namespace BankSystem {
 
             System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Bankomat::typeid));
             this->buttonBackround = (gcnew System::Windows::Forms::Button());
+            this->labelKwotaWplata = (gcnew System::Windows::Forms::Label());
+            this->labelKwotaWyplata = (gcnew System::Windows::Forms::Label());
             this->labelSaldo = (gcnew System::Windows::Forms::Label());
             this->label2 = (gcnew System::Windows::Forms::Label());
             this->textBoxKwotaWplata = (gcnew System::Windows::Forms::TextBox());
@@ -330,7 +334,29 @@ namespace BankSystem {
             this->buttonBackround->BackColor = System::Drawing::Color::LightGray;
             this->buttonBackround->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
             this->buttonBackround->Enabled = false; // Ustawienie na nieinteraktywne
+            // Dodanie labelKwotaWplata
+            this->labelKwotaWplata = (gcnew System::Windows::Forms::Label());
+            this->labelKwotaWplata->AutoSize = true;
+            this->labelKwotaWplata->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+                static_cast<System::Byte>(238)));
+            this->labelKwotaWplata->Location = System::Drawing::Point(107, 105);
+            this->labelKwotaWplata->Name = L"labelKwotaWplata";
+            this->labelKwotaWplata->Size = System::Drawing::Size(103, 20);
+            this->labelKwotaWplata->TabIndex = 25;
+            this->labelKwotaWplata->Text = L"Kwota wp³aty:";
+            this->Controls->Add(this->labelKwotaWplata);
 
+            // Dodanie labelKwotaWyplata
+            this->labelKwotaWyplata = (gcnew System::Windows::Forms::Label());
+            this->labelKwotaWyplata->AutoSize = true;
+            this->labelKwotaWyplata->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+                static_cast<System::Byte>(238)));
+            this->labelKwotaWyplata->Location = System::Drawing::Point(356, 105);
+            this->labelKwotaWyplata->Name = L"labelKwotaWyplata";
+            this->labelKwotaWyplata->Size = System::Drawing::Size(111, 20);
+            this->labelKwotaWyplata->TabIndex = 26;
+            this->labelKwotaWyplata->Text = L"Kwota wyp³aty:";
+            this->Controls->Add(this->labelKwotaWyplata);
             // 
             // Bankomat
             // 
@@ -437,7 +463,7 @@ namespace BankSystem {
                 }
                 klient->setSaldo(klient->getSaldo() + kwota);
                 listaKont->ZapiszDoPliku("dane_klientow.txt");
-                ZapiszTransakcjeDoPliku("Wp³ata", klient->getNumerKonta(), "", kwota);
+                ZapiszTransakcjeDoPliku("Wplata", klient->getNumerKonta(), "", kwota);
                 labelSaldo->Text = System::String::Format(L"{0:F2}", klient->getSaldo());
                 MessageBox::Show("Wp³ata zakoñczona sukcesem.", "Sukces", MessageBoxButtons::OK, MessageBoxIcon::Information);
             }
@@ -455,7 +481,7 @@ namespace BankSystem {
                 }
                 klient->setSaldo(klient->getSaldo() - kwota);
                 listaKont->ZapiszDoPliku("dane_klientow.txt");
-                ZapiszTransakcjeDoPliku("Wyp³ata", klient->getNumerKonta(), "", kwota);
+                ZapiszTransakcjeDoPliku("Wyplata", klient->getNumerKonta(), "", kwota);
                 labelSaldo->Text = System::String::Format(L"{0:F2}", klient->getSaldo());
                 MessageBox::Show("Wyp³ata zakoñczona sukcesem.", "Sukces", MessageBoxButtons::OK, MessageBoxIcon::Information);
             }
